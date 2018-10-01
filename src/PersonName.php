@@ -39,16 +39,37 @@ class PersonName
         return implode('', head($matches));
     }
 
+    /**
+     * Initial the first name.
+     *
+     * T. Crews
+     *
+     * @return string
+     */
     public function abbreviated()
     {
         return $this->first()[0] . '. ' . $this->last();
     }
 
+    /**
+     * Last name, first name.
+     *
+     * Crews, Terry
+     *
+     * @return string
+     */
     public function sorted()
     {
         return $this->last() . ', ' . $this->first();
     }
 
+    /**
+     * Username-esque.
+     *
+     * terryc
+     *
+     * @return string
+     */
     public function mentionable()
     {
         return strtolower($this->first() . $this->last()[0]);
@@ -63,16 +84,34 @@ class PersonName
         return $this->name . "'s";
     }
 
+    /**
+     * Initial the last name.
+     *
+     * Terry C.
+     *
+     * @return string
+     */
     public function familiar()
     {
         return $this->first() . ' ' . strtoupper($this->last()[0]) . '.';
     }
 
+    /**
+     * Make the methods accessibles as attributes.
+     *
+     * @param  string  $attribute
+     * @return string
+     */
     public function __get($attribute)
     {
         return call_user_func([$this, $attribute]);
     }
 
+    /**
+     * Let's just use the full name when echoed.
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;
