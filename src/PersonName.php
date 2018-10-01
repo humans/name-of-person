@@ -116,19 +116,4 @@ class PersonName
     {
         return $this->name;
     }
-
-    public function toArray()
-    {
-        return [
-            'full'        => $this->name,
-            'first'       => $this->first,
-            'last'        => $this->last,
-            'initials'    => $this->initials,
-            'abbreviated' => $this->abbreviated,
-            'sorted'      => $this->sorted,
-            'mentionable' => $this->mentionable,
-            'possessive'  => $this->possessive,
-            'familiar'    => $this->familiar,
-        ];
-    }
 }
