@@ -1,0 +1,13 @@
+{
+    "name": "artisan/name-of-person",
+    "description": "A simple wrapper for person names.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jaggy Gauran",
+            "email": "jaggy@artisan.studio"
+        }
+    ],
+    "require": {}
+}
