@@ -8,12 +8,13 @@ This is a pretty simplified library without accounting for any of the edge cases
 
 ## Installation
 
-```
+```bash
 composer require artisan/name-of-person
 ```
 
 ## Usage
-```
+
+```php
 use Artisan\NameOfPerson\PersonName;
 
 $name = new PersonName('Terry Crews');
@@ -31,7 +32,7 @@ $name->possessive;  // => "Terry Crews'"
 
 If you want to use it with a Laravel model, we've also provided a trait for that.
 
-```
+```php
 use Artisan\NameOfPerson\Laravel\HasPersonName;
 
 class Person extends Model
@@ -44,4 +45,4 @@ class Person extends Model
 
 There's still some cases that we'd want to cover such as users only providing single names.
 
-We don't really want to plan on supporting complex naming rules, so feel free to fork the project if you want to add more functionality.a
+We don't really want to plan on supporting complex naming rules, so feel free to fork the project if you want to add more functionality.
