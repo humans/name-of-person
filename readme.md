@@ -30,19 +30,18 @@ $name->mentionable; // => "terryc"
 $name->possessive;  // => "Terry Crews'"
 ```
 
-If you want to use it with a Laravel model, we've also provided a trait for that.
+## The Laravel Trait has been removed!
+
+I ended up not using the trait since there are projects that I wanted to use a different key for the name. Instead, if you want to use the library, I highly suggest using a different attribute to avoid conflicts when building JSON APIs.
 
 ```php
-use Artisan\NameOfPerson\Laravel\HasPersonName;
+use Artisan\NameOfPerson\PersonName;
 
-class Person extends Model
+class User
 {
-    use HasPersonName;
+    public function getNameAttribute()
+    {
+        return new PersonName($this->attributes['full_name']);
+    }
 }
 ```
-
-## Todo
-
-There's still some cases that we'd want to cover such as users only providing single names.
-
-We don't really want to plan on supporting complex naming rules, so feel free to fork the project if you want to add more functionality.
