@@ -15,85 +15,83 @@ class PersonName
 
     public function full()
     {
-        return $this->name;
+        return new static($this->name);
     }
 
     public function first()
     {
-        return Str::before($this->name, ' ');
+        return new static(Str::before($this->name, ' '));
     }
 
     public function last()
     {
-        if (! Str::contains($this->name, ' ')) {
-            return null;
-        }
-
-        return Str::after($this->name, ' ');
+        return new static(Str::after($this->name, ' '));
     }
 
     public function initials()
     {
         preg_match_all('/(?<=\s|^)[A-Z]/', $this->name, $matches);
 
-        return implode('', head($matches));
+        return new static(implode('', head($matches)));
     }
 
     /**
-     * Initial the first name.
-     *
      * T. Crews
      *
      * @return string
      */
     public function abbreviated()
     {
-        return $this->first()[0] . '. ' . $this->last();
+        return new static(
+            sprintf('%.1s. %s', $this->first(), $this->last())
+        );
     }
 
     /**
-     * Last name, first name.
-     *
      * Crews, Terry
      *
      * @return string
      */
     public function sorted()
     {
-        return $this->last() . ', ' . $this->first();
+        return new static($this->last() . ', ' . $this->first());
     }
 
     /**
-     * Username-esque.
-     *
      * terryc
      *
      * @return string
      */
     public function mentionable()
     {
-        return strtolower($this->first() . $this->last()[0]);
+        return new static(
+            sprintf(
+                '%s%.1s',
+                strtolower($this->first()),
+                strtolower($this->last())
+            )
+        );
     }
 
     public function possessive()
     {
         if (Str::endsWith($this->name, 's')) {
-            return $this->name . "'";
+            return new static($this->name . "'");
         }
 
-        return $this->name . "'s";
+        return new static($this->name . "'s");
     }
 
     /**
-     * Initial the last name.
-     *
      * Terry C.
      *
      * @return string
      */
     public function familiar()
     {
-        return $this->first() . ' ' . strtoupper($this->last()[0]) . '.';
+        return new static(
+            sprintf('%s %.1s.', $this->first(), strtoupper($this->last()))
+        );
     }
 
     /**

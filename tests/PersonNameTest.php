@@ -5,6 +5,13 @@ use Artisan\NameOfPerson\PersonName;
 
 class PersonNameTest extends TestCase
 {
+    function test_return_a_new_person_name_object()
+    {
+        $name = new PersonName('Terry Crews');
+
+        $this->assertInstanceOf(PersonName::class, $name->full);
+    }
+
     function test_full_name()
     {
         $name = new PersonName('Terry Crews');
@@ -30,7 +37,7 @@ class PersonNameTest extends TestCase
     {
         $name = new PersonName('Terry');
 
-        $this->assertEquals('', $name->last);
+        $this->assertEquals('Terry', $name->last);
     }
 
     function test_initials()
@@ -79,10 +86,25 @@ class PersonNameTest extends TestCase
         $this->assertEquals("Terry C.", $name->familiar);
     }
 
+    function test_familiar_name_force_last_initial_to_upper()
+    {
+        $name = new PersonName('Terry crews');
+
+        $this->assertEquals("Terry C.", $name->familiar);
+    }
+
     function test_full_name_when_object_cast_as_string()
     {
         $name = new PersonName('Terry Crews');
 
         $this->assertEquals('Terry Crews', (string) $name);
+    }
+
+    function test_chainable()
+    {
+        $name = new PersonName('Terry Crews');
+
+        $this->assertEquals("Terry's", $name->first->possessive);
+        $this->assertEquals("Crews'", $name->last->possessive);
     }
 }
