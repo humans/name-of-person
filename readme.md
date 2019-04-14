@@ -1,4 +1,4 @@
-# Name of Person
+# Name of Person v2
 
 A port of [Basecamp's name of person library](https://github.com/basecamp/name_of_person).
 
@@ -12,6 +12,10 @@ This is a pretty simplified library without accounting for any of the edge cases
 composer require artisan/name-of-person
 ```
 
+## Upgrade Notes
+
+The API now returns an instance of the `PersonName` class instead of the string to allow for method chaining. This should not affect most of the use cases.
+
 ## Usage
 
 ```php
@@ -19,15 +23,17 @@ use Artisan\NameOfPerson\PersonName;
 
 $name = new PersonName('Terry Crews');
 
-$name->full;        // => "Terry Crews"
-$name->first;       // => "Terry"
-$name->last;        // => "Crews"
-$name->initials;    // => "TC"
-$name->familiar;    // => "Terry C."
-$name->abbreviated; // => "T. Crews"
-$name->sorted;      // => "Crews, Terry"
-$name->mentionable; // => "terryc"
-$name->possessive;  // => "Terry Crews'"
+$name->full;              // => "Terry Crews"
+$name->first;             // => "Terry"
+$name->last;              // => "Crews"
+$name->initials;          // => "TC"
+$name->familiar;          // => "Terry C."
+$name->abbreviated;       // => "T. Crews"
+$name->sorted;            // => "Crews, Terry"
+$name->mentionable;       // => "terryc"
+$name->possessive;        // => "Terry Crews'"
+$name->first->possessive  // => Terry's
+$name->last->possessive   // => Crews'
 ```
 
 ## The Laravel Trait has been removed!
