@@ -1,4 +1,4 @@
-# Name of Person
+# Name of Person v2
 
 A port of [Basecamp's name of person library](https://github.com/basecamp/name_of_person).
 
@@ -12,6 +12,10 @@ This is a pretty simplified library without accounting for any of the edge cases
 composer require artisan/name-of-person
 ```
 
+## Upgrade Notes
+
+The API now returns an instance of the `PersonName` class instead of the string to allow for method chaining. This should not affect most of the use cases.
+
 ## Usage
 
 ```php
@@ -19,30 +23,31 @@ use Artisan\NameOfPerson\PersonName;
 
 $name = new PersonName('Terry Crews');
 
-$name->full;        // => "Terry Crews"
-$name->first;       // => "Terry"
-$name->last;        // => "Crews"
-$name->initials;    // => "TC"
-$name->familiar;    // => "Terry C."
-$name->abbreviated; // => "T. Crews"
-$name->sorted;      // => "Crews, Terry"
-$name->mentionable; // => "terryc"
-$name->possessive;  // => "Terry Crews'"
+$name->full;              // => "Terry Crews"
+$name->first;             // => "Terry"
+$name->last;              // => "Crews"
+$name->initials;          // => "TC"
+$name->familiar;          // => "Terry C."
+$name->abbreviated;       // => "T. Crews"
+$name->sorted;            // => "Crews, Terry"
+$name->mentionable;       // => "terryc"
+$name->possessive;        // => "Terry Crews'"
+$name->first->possessive  // => Terry's
+$name->last->possessive   // => Crews'
 ```
 
-If you want to use it with a Laravel model, we've also provided a trait for that.
+## The Laravel Trait has been removed!
+
+I ended up not using the trait since there are projects that I wanted to use a different key for the name. Instead, if you want to use the library, I highly suggest using a different attribute to avoid conflicts when building JSON APIs.
 
 ```php
-use Artisan\NameOfPerson\Laravel\HasPersonName;
+use Artisan\NameOfPerson\PersonName;
 
-class Person extends Model
+class User
 {
-    use HasPersonName;
+    public function getNameAttribute()
+    {
+        return new PersonName($this->attributes['full_name']);
+    }
 }
 ```
-
-## Todo
-
-There's still some cases that we'd want to cover such as users only providing single names.
-
-We don't really want to plan on supporting complex naming rules, so feel free to fork the project if you want to add more functionality.
