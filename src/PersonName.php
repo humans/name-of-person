@@ -2,6 +2,7 @@
 
 namespace Artisan\NameOfPerson;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 
 class PersonName
