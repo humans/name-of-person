@@ -1,6 +1,6 @@
 <?php
 
-namespace Artisan\NameOfPerson;
+namespace Humans\NameOfPerson;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;

@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Artisan\NameOfPerson\PersonName;
+use Humans\NameOfPerson\PersonName;
 
 class PersonNameTest extends TestCase
 {

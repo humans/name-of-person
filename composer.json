@@ -1,12 +1,12 @@
 {
-    "name": "artisan/name-of-person",
+    "name": "humans/name-of-person",
     "description": "A wrappr for parsing people's names.",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Jaggy Gauran",
-            "email": "jaggy@artisan.studio"
+            "email": "jaggy@humans.studio"
         }
     ],
     "require-dev": {
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Artisan\\NameOfPerson\\": "src"
+            "Humans\\NameOfPerson\\": "src"
         }
     },
     "require": {
