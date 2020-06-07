@@ -11,6 +11,11 @@ class PersonName
         $this->name = $name;
     }
 
+    public static function new($name)
+    {
+        return new static($name);
+    }
+
     public function full()
     {
         return new self($this->name);
