@@ -107,4 +107,12 @@ class PersonNameTest extends TestCase
         $this->assertEquals("Terry's", $name->first->possessive);
         $this->assertEquals("Crews'", $name->last->possessive);
     }
+
+    function test_named_constructor()
+    {
+        $this->assertEquals(
+            'Terry Crews',
+            PersonName::new('Terry Crews')->full,
+        );
+    }
 }
