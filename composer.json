@@ -16,9 +16,5 @@
         "psr-4": {
             "Humans\\NameOfPerson\\": "src"
         }
-    },
-    "require": {
-        "illuminate/support": "^5.5|^6.0|^7.0",
-        "illuminate/contracts": "^5.5|^6.0|^7.0"
     }
 }
