@@ -33,7 +33,7 @@ class PersonNameTest extends TestCase
         $this->assertEquals('Crews', $name->last);
     }
 
-    function test_return_null_when_no_last_name()
+    function test_return_the_name_when_theres_no_last_name()
     {
         $name = new PersonName('Terry');
 

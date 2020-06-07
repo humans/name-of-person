@@ -2,9 +2,6 @@
 
 namespace Humans\NameOfPerson;
 
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Support\Str;
-
 class PersonName
 {
     private $name;
@@ -16,56 +13,50 @@ class PersonName
 
     public function full()
     {
-        return new static($this->name);
+        return new self($this->name);
     }
 
     public function first()
     {
-        return new static(Str::before($this->name, ' '));
+        return new self(
+            explode(' ', $this->name)[0]
+        );
     }
 
     public function last()
     {
-        return new static(Str::after($this->name, ' '));
+        $segments = explode(' ', $this->name);
+        array_shift($segments);
+
+        if (count($segments) === 0) {
+            return new self($this->name);
+        }
+
+        return new self(implode(' ', $segments));
     }
 
     public function initials()
     {
         preg_match_all('/(?<=\s|^)[A-Z]/', $this->name, $matches);
 
-        return new static(implode('', head($matches)));
+        return new self(implode('', $matches[0]));
     }
 
-    /**
-     * T. Crews
-     *
-     * @return string
-     */
     public function abbreviated()
     {
-        return new static(
+        return new self(
             sprintf('%.1s. %s', $this->first(), $this->last())
         );
     }
 
-    /**
-     * Crews, Terry
-     *
-     * @return string
-     */
     public function sorted()
     {
-        return new static($this->last() . ', ' . $this->first());
+        return new self($this->last() . ', ' . $this->first());
     }
 
-    /**
-     * terryc
-     *
-     * @return string
-     */
     public function mentionable()
     {
-        return new static(
+        return new self(
             sprintf(
                 '%s%.1s',
                 strtolower($this->first()),
@@ -76,41 +67,25 @@ class PersonName
 
     public function possessive()
     {
-        if (Str::endsWith($this->name, 's')) {
-            return new static($this->name . "'");
+        if (substr($this->name, -1) === 's') {
+            return new self($this->name . "'");
         }
 
-        return new static($this->name . "'s");
+        return new self($this->name . "'s");
     }
 
-    /**
-     * Terry C.
-     *
-     * @return string
-     */
     public function familiar()
     {
-        return new static(
+        return new self(
             sprintf('%s %.1s.', $this->first(), strtoupper($this->last()))
         );
     }
 
-    /**
-     * Make the methods accessibles as attributes.
-     *
-     * @param  string  $attribute
-     * @return string
-     */
     public function __get($attribute)
     {
         return call_user_func([$this, $attribute]);
     }
 
-    /**
-     * Let's just use the full name when echoed.
-     *
-     * @return string
-     */
     public function __toString()
     {
         return $this->name;
