@@ -9,6 +9,9 @@
             "email": "jaggy@humans.ph"
         }
     ],
+    "require": {
+        "php": ">=7.3.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^7.3"
     },
