@@ -6,29 +6,29 @@ class PersonName
 {
     private $name;
 
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    public static function new($name)
+    public static function new(string $name): self
     {
         return new static($name);
     }
 
-    public function full()
+    public function full(): self
     {
         return new self($this->name);
     }
 
-    public function first()
+    public function first(): self
     {
         return new self(
             explode(' ', $this->name)[0]
         );
     }
 
-    public function last()
+    public function last(): self
     {
         $segments = explode(' ', $this->name);
         array_shift($segments);
@@ -40,26 +40,26 @@ class PersonName
         return new self(implode(' ', $segments));
     }
 
-    public function initials()
+    public function initials(): self
     {
         preg_match_all('/(?<=\s|^)[A-Z]/', $this->name, $matches);
 
         return new self(implode('', $matches[0]));
     }
 
-    public function abbreviated()
+    public function abbreviated(): self
     {
         return new self(
             sprintf('%.1s. %s', $this->first(), $this->last())
         );
     }
 
-    public function sorted()
+    public function sorted(): self
     {
         return new self($this->last() . ', ' . $this->first());
     }
 
-    public function mentionable()
+    public function mentionable(): self
     {
         return new self(
             sprintf(
@@ -70,7 +70,7 @@ class PersonName
         );
     }
 
-    public function possessive()
+    public function possessive(): self
     {
         if (substr($this->name, -1) === 's') {
             return new self($this->name . "'");
@@ -79,19 +79,19 @@ class PersonName
         return new self($this->name . "'s");
     }
 
-    public function familiar()
+    public function familiar(): self
     {
         return new self(
             sprintf('%s %.1s.', $this->first(), strtoupper($this->last()))
         );
     }
 
-    public function __get($attribute)
+    public function __get($attribute): self
     {
         return call_user_func([$this, $attribute]);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }
